@@ -1,6 +1,10 @@
 package edu.austral.ingsis.math;
 
+import edu.austral.ingsis.math.composite.Constant;
+import edu.austral.ingsis.math.composite.operations.*;
 import org.junit.Test;
+
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -13,8 +17,10 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction1() {
-        final Double result = 7d;
-
+        Constant constant= new Constant(1);
+        Constant constant2=new Constant(6);
+        Sum sum=new Sum(constant,constant2);
+        final Double result = sum.evaluate(Map.of());
         assertThat(result, equalTo(7d));
     }
 
@@ -23,8 +29,10 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction2() {
-        final Double result = 6d;
-
+        Constant constant=new Constant(12);
+        Constant constant2=new Constant(2);
+        Division division=new Division(constant,constant2);
+        final Double result = division.evaluate(Map.of());
         assertThat(result, equalTo(6d));
     }
 
@@ -33,8 +41,12 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction3() {
-        final Double result = 13.5;
-
+        Constant constant=new Constant(9);
+        Constant constant2=new Constant(2);
+        Division division=new Division(constant,constant2);
+        Constant constant3=new Constant(3);
+        Multiplier multiplier=new Multiplier(division,constant3);
+        final Double result=multiplier.evaluate(Map.of());
         assertThat(result, equalTo(13.5d));
     }
 
@@ -43,8 +55,12 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction4() {
-        final Double result = 20.25;
-
+        Constant constant=new Constant(27);
+        Constant constant2=new Constant(6);
+        Division division=new Division(constant,constant2);
+        Constant constant3=new Constant(2);
+        Power power=new Power(division,constant3);
+        final Double result=power.evaluate(Map.of());
         assertThat(result, equalTo(20.25d));
     }
 
@@ -53,8 +69,10 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction5() {
-        final Double result = 6d;
-
+        Constant constant=new Constant(36);
+        Constant constant2=new Constant(2);
+        Root root=new Root(constant,constant2);
+        final Double result=root.evaluate(Map.of());
         assertThat(result, equalTo(6d));
     }
 
@@ -63,9 +81,9 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction6() {
-        final Double result = 136d;
-
-        assertThat(result, equalTo(136d));
+        Constant constant=new Constant(136);
+        Abs abs=new Abs(constant);
+        assertThat(abs.evaluate(Map.of()), equalTo(136d));
     }
 
     /**
@@ -73,9 +91,9 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction7() {
-        final Double result = 136d;
-
-        assertThat(result, equalTo(136d));
+        Constant constant=new Constant(-136);
+        Abs abs=new Abs(constant);
+        assertThat(abs.evaluate(Map.of()), equalTo(136d));
     }
 
     /**
@@ -83,8 +101,10 @@ public class ResolutionTest {
      */
     @Test
     public void shouldResolveSimpleFunction8() {
-        final Double result = 0d;
-
-        assertThat(result, equalTo(0d));
+        Constant constant=new Constant(5);
+        Constant constant2=new Constant(8);
+        Subtract substraction=new Subtract(constant,constant);
+        Multiplier multiplier=new Multiplier(substraction,constant2);
+        assertThat(multiplier.evaluate(Map.of()), equalTo(0d));
     }
 }
