@@ -23,6 +23,6 @@ public class Abs implements Function {
 
     @Override
     public String print() {
-        return "abs(" + value.print() + ")";
+        return "|" + value.print() + "|";
     }
 }

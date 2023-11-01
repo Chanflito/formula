@@ -2,6 +2,7 @@ package edu.austral.ingsis.math.composite.operations;
 
 import edu.austral.ingsis.math.composite.Function;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,13 +23,13 @@ public class Subtract implements Function {
 
     @Override
     public List<String> getVariables() {
-        List<String> variables = left.getVariables();
+        List<String> variables = new ArrayList<>(left.getVariables());
         variables.addAll(right.getVariables());
         return variables;
     }
 
     @Override
     public String print() {
-        return left.print() + " - " + right.print();
+        return ("("+ left.print() + " - " + right.print()+")");
     }
 }
