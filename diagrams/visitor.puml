@@ -1,0 +1,80 @@
+@startuml
+interface Visitor<T>{
+    +visit(Sum sum):T
+    +visit(Division division):T
+    +visit(Multiplier multiplier):T
+    +visit(Subtract subtract):T
+    +visit(Variable variable):T
+    +visit(Abs abs):T
+    +visit (Power power):T
+    +visit (Root root):T
+    +visit (Constant constant):T
+}
+
+interface Function{
+    +accept(Visitor visitor):T
+}
+
+class Abs implements Function{
+    -value : Function
+    +accept(Visitor visitor):T
+}
+
+class Constant implements Function{
+    -value : Double
+    +accept(Visitor visitor):T
+}
+
+class Division implements Function{
+    -left : Function
+    -right : Function
+    +accept(Visitor visitor):T
+}
+
+class Multiplier implements Function{
+    -left : Function
+    -right : Function
+    +accept(Visitor visitor):T
+}
+
+class Power implements Function{
+    -left : Function
+    -right : Function
+    +accept(Visitor visitor):T
+}
+
+class Root implements Function{
+    -left : Function
+    -right : Function
+    +accept(Visitor visitor):T
+}
+
+class Subtract implements Function{
+    -left : Function
+    -right : Function
+    +accept(Visitor visitor):T
+}
+
+class Sum implements Function{
+    -left : Function
+    -right : Function
+    +accept(Visitor visitor):T
+}
+
+class Variable implements Function{
+    -name : String
+    +accept(Visitor visitor):T
+}
+class EvaluateVisitor<Double> implements Visitor{
+    -variables : Map<String, Double>
+
+}
+
+class PrintVisitor<String> implements Visitor{
+}
+
+class ListVariableVisitor<List<String>> implements Visitor{
+    -combineLists(List<String> s1, List<String> s2):List<String>
+}
+Function -> Visitor
+@enduml

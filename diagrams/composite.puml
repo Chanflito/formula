@@ -1,0 +1,49 @@
+@startuml
+
+interface Function{
+    +evaluate(Map<String,Double> map):double
+    +getVariables():List<String>
+    +print():String
+}
+
+class Constant implements Function{
+    -value:double
+}
+class Variable implements Function{
+    -name:String
+}
+
+class Sum implements Function{
+    -left:Function
+    -right:Function
+}
+
+class Subtract implements Function{
+    -left:Function
+    -right:Function
+}
+
+class Multiplier implements Function{
+    -left:Function
+    -right:Function
+}
+
+class Division implements Function{
+    -left:Function
+    -right:Function
+}
+
+class Power implements Function{
+    -left:Function
+    -right:Function
+}
+
+class Root implements Function{
+    -left:Function
+    -right:Function
+    }
+
+class Abs implements Function{
+    -value:Function
+    }
+@enduml
